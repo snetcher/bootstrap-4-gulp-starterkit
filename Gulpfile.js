@@ -6,6 +6,7 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename'),
     uglify      = require('gulp-uglify'),
     gutil       = require('gulp-util'),
+    babel       = require('gulp-babel'),
     imagemin    = require('gulp-imagemin');
 
 var rootDir   = '.';
@@ -36,12 +37,12 @@ var components = {
 }
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['scss', 'uglify', 'html', 'image'], function() {
+gulp.task('serve', ['scss', 'es6', 'uglify', 'html', 'image'], function() {
 
     browserSync.init({server: destDir});
 
     gulp.watch(components.scss.watch,  ['scss']);
-    gulp.watch(components.js.watch,    ['uglify']);
+    gulp.watch(components.js.watch,    ['es6', 'uglify']);
     gulp.watch(components.image.watch, ['image']);
     gulp.watch(components.html.watch,  ['html']);
     gulp.watch(components.html.watch).on('change', browserSync.reload);
@@ -62,6 +63,14 @@ gulp.task('image', function () {
     .pipe(imagemin())
     .pipe(gulp.dest(components.image.dest));
     
+});
+
+gulp.task('es6', () => {
+    return gulp.src(components.js.watch)
+    .pipe(babel({
+        presets: ['es2015']
+    }))
+    .pipe(gulp.dest(components.js.dest));
 });
 
 gulp.task('html', function () {
