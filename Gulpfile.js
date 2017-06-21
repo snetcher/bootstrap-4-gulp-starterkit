@@ -5,7 +5,8 @@ var gulp        = require('gulp'),
     prefix      = require('gulp-autoprefixer'),
     rename      = require('gulp-rename'),
     uglify      = require('gulp-uglify'),
-    gutil       = require('gulp-util');
+    gutil       = require('gulp-util'),
+    imagemin    = require('gulp-imagemin');
 
 var rootDir = '.';
 var sourceDir = rootDir + '/src';
@@ -16,6 +17,11 @@ var components = {
         source: sourceDir + '/scss',
         watch:  sourceDir + '/scss/*.scss',
         dest:   destDir + '/css'
+    },
+    image: {
+        source: sourceDir + '/img',
+        watch:  sourceDir + '/img/*',
+        dest:   destDir + '/images'
     },
     js: {
         source: sourceDir + '/js',
@@ -46,6 +52,13 @@ gulp.task('uglify', function(){
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(components.js.dest));
 });
+
+gulp.task('image', function () {
+    gulp.src(components.image.watch)
+        .pipe(imagemin())
+        .pipe(gulp.dest(components.image.dest));
+    
+})
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
