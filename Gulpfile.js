@@ -1,6 +1,6 @@
 var gulp        = require('gulp'),
     browserSync = require('browser-sync').create(),
-    sass        = require('gulp-sass'),
+    scss        = require('gulp-sass'),
     minifycss   = require('gulp-clean-css'),
     prefix      = require('gulp-autoprefixer'),
     rename      = require('gulp-rename'),
@@ -31,11 +31,11 @@ var components = {
 }
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass', 'uglify', 'image'], function() {
+gulp.task('serve', ['scss', 'uglify', 'html', 'image'], function() {
 
     browserSync.init({server: destDir});
 
-    gulp.watch(components.scss.watch, ['sass']);
+    gulp.watch(components.scss.watch, ['scss']);
     gulp.watch(components.js.watch, ['uglify']);
     gulp.watch(components.image.watch, ['image']);
     gulp.watch(sourceDir + "/*.html")
@@ -61,10 +61,10 @@ gulp.task('image', function () {
     
 })
 
-// Compile sass into CSS & auto-inject into browsers
-gulp.task('sass', function() {
+// Compile scss into CSS & auto-inject into browsers
+gulp.task('scss', function() {
     gulp.src(components.scss.watch)
-    .pipe(sass())
+    .pipe(scss())
     .pipe(prefix("last 2 version", "> 1%", "ie 8", "ie 7"))
     // .pipe(gulp.dest(components.scss.dest))
     .pipe(minifycss())
