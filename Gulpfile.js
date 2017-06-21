@@ -66,7 +66,7 @@ gulp.task('sass', function() {
     gulp.src(components.scss.watch)
     .pipe(sass())
     .pipe(prefix("last 2 version", "> 1%", "ie 8", "ie 7"))
-    .pipe(gulp.dest(components.scss.dest))
+    // .pipe(gulp.dest(components.scss.dest))
     .pipe(minifycss())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(components.scss.dest))
