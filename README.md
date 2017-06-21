@@ -12,7 +12,7 @@ Description
 
 ## Tests
 
-## Development
+## Bugs and feature requests
 
 - Source hosted at [GitHub](https://github.com/snetcher/bootstrap-4-gulp-starterkit)
 - Report issues, questions, feature requests on [GitHub Issues](https://github.com/snetcher/bootstrap-4-gulp-starterkit/issues)
