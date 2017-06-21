@@ -8,15 +8,15 @@ var gulp        = require('gulp'),
     gutil       = require('gulp-util'),
     imagemin    = require('gulp-imagemin');
 
-var rootDir = '.';
+var rootDir   = '.';
 var sourceDir = rootDir + '/src';
-var destDir = rootDir + '/build';
+var destDir   = rootDir + '/build';
 
 var components = {
     scss: {
         source: sourceDir + '/scss',
         watch:  sourceDir + '/scss/*.scss',
-        dest:   destDir + '/css'
+        dest:   destDir   + '/css'
     },
     html: {
         source: sourceDir,
@@ -26,12 +26,12 @@ var components = {
     image: {
         source: sourceDir + '/images',
         watch:  sourceDir + '/images/*',
-        dest:   destDir + '/images'
+        dest:   destDir   + '/images'
     },
     js: {
         source: sourceDir + '/js',
         watch:  sourceDir + '/js/*.js',
-        dest:   destDir + '/js'
+        dest:   destDir   + '/js'
     }
 }
 
