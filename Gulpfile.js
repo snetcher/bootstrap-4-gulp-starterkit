@@ -1,6 +1,7 @@
 var gulp        = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass        = require('gulp-sass');
+var minifycss   = require('gulp-clean-css');
 var prefix      = require('gulp-autoprefixer');
 
 // Static Server + watching scss/html files
@@ -19,6 +20,7 @@ gulp.task('sass', function() {
     return gulp.src("app/scss/*.scss")
         .pipe(sass())
         .pipe(prefix("last 2 version", "> 1%", "ie 8", "ie 7"))
+        .pipe(minifycss())
         .pipe(gulp.dest("app/css"))
         .pipe(browserSync.stream());
 });
