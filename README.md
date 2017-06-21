@@ -1,8 +1,8 @@
 # Start with Bootstrap 4
 
-Description
+This is a quick start kit for developing with bootstrap.
 
-[Demo](https://snetcher.github.io/bootstrap-4-gulp-starterkit)
+[Project page](https://snetcher.github.io/bootstrap-4-gulp-starterkit)
 
 ## Installation
 
