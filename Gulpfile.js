@@ -18,6 +18,11 @@ var components = {
         watch:  sourceDir + '/scss/*.scss',
         dest:   destDir + '/css'
     },
+    html: {
+        source: sourceDir,
+        watch:  sourceDir + '/*.html',
+        dest:   destDir
+    },
     image: {
         source: sourceDir + '/images',
         watch:  sourceDir + '/images/*',
@@ -38,7 +43,8 @@ gulp.task('serve', ['scss', 'uglify', 'html', 'image'], function() {
     gulp.watch(components.scss.watch, ['scss']);
     gulp.watch(components.js.watch, ['uglify']);
     gulp.watch(components.image.watch, ['image']);
-    gulp.watch(sourceDir + "/*.html")
+    gulp.watch(components.html.watch, ['html']);
+    gulp.watch(components.html.watch)
     .on('change', browserSync.reload);
 });
 
@@ -59,7 +65,12 @@ gulp.task('image', function () {
         .pipe(imagemin())
         .pipe(gulp.dest(components.image.dest));
     
-})
+});
+
+gulp.task('html', function () {
+    gulp.src(components.html.watch)
+        .pipe(gulp.dest(components.html.dest));
+});
 
 // Compile scss into CSS & auto-inject into browsers
 gulp.task('scss', function() {
