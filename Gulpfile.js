@@ -62,8 +62,8 @@ gulp.task('uglify', function(){
 
 gulp.task('image', function () {
     gulp.src(components.image.watch)
-        .pipe(imagemin())
-        .pipe(gulp.dest(components.image.dest));
+    .pipe(imagemin())
+    .pipe(gulp.dest(components.image.dest));
     
 });
 
