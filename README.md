@@ -2,6 +2,13 @@
 
 Description
 
+## Installation
+
+## Usage
+
+## Configuration
+
+## Tests
 
 ## Development
 
