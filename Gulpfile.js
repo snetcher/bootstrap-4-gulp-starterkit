@@ -1,11 +1,11 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync').create();
-var sass        = require('gulp-sass');
-var minifycss   = require('gulp-clean-css');
-var prefix      = require('gulp-autoprefixer');
-var rename      = require('gulp-rename');
-var uglify      = require('gulp-uglify');
-var gutil       = require('gulp-util');
+var gulp        = require('gulp'),
+    browserSync = require('browser-sync').create(),
+    sass        = require('gulp-sass'),
+    minifycss   = require('gulp-clean-css'),
+    prefix      = require('gulp-autoprefixer'),
+    rename      = require('gulp-rename'),
+    uglify      = require('gulp-uglify'),
+    gutil       = require('gulp-util');
 
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass', 'uglify'], function() {
