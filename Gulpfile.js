@@ -7,19 +7,36 @@ var gulp        = require('gulp'),
     uglify      = require('gulp-uglify'),
     gutil       = require('gulp-util');
 
+var rootDir = '.';
+var sourceDir = rootDir + '/src';
+var destDir = rootDir + '/build';
+
+var components = {
+    scss: {
+        source: sourceDir + '/scss',
+        watch:  sourceDir + '/scss/*.scss',
+        dest:   destDir + '/css'
+    },
+    js: {
+        source: sourceDir + '/js',
+        watch:  sourceDir + '/js/*.js',
+        dest:   destDir + '/js'
+    }
+}
+
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass', 'uglify'], function() {
 
-    browserSync.init({server: "./app"});
+    browserSync.init({server: destDir});
 
-    gulp.watch("app/scss/*.scss", ['sass']);
-    gulp.watch("app/scripts/*.js", ['uglify']);
-    gulp.watch("app/*.html")
+    gulp.watch(components.scss.watch, ['sass']);
+    gulp.watch(components.js.watch, ['uglify']);
+    gulp.watch(sourceDir + "/*.html")
     .on('change', browserSync.reload);
 });
 
 gulp.task('uglify', function(){
-    gulp.src("app/scripts/*.js")
+    gulp.src(components.js.watch)
     .pipe(uglify()
             .on('error', function(err) {
                 gutil.log(gutil.colors.red('[Error]'), err.toString());
@@ -27,18 +44,18 @@ gulp.task('uglify', function(){
             })
         )
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest("app/js"));
+    .pipe(gulp.dest(components.js.dest));
 });
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
-    gulp.src("app/scss/*.scss")
+    gulp.src(components.scss.watch)
     .pipe(sass())
     .pipe(prefix("last 2 version", "> 1%", "ie 8", "ie 7"))
-    .pipe(gulp.dest("app/css"))
+    .pipe(gulp.dest(components.scss.dest))
     .pipe(minifycss())
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest("app/css"))
+    .pipe(gulp.dest(components.scss.dest))
     .pipe(browserSync.stream());
 });
 
