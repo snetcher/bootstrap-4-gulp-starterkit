@@ -31,12 +31,13 @@ var components = {
 }
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass', 'uglify'], function() {
+gulp.task('serve', ['sass', 'uglify', 'image'], function() {
 
     browserSync.init({server: destDir});
 
     gulp.watch(components.scss.watch, ['sass']);
     gulp.watch(components.js.watch, ['uglify']);
+    gulp.watch(components.image.watch, ['image']);
     gulp.watch(sourceDir + "/*.html")
     .on('change', browserSync.reload);
 });
