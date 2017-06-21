@@ -18,6 +18,7 @@ gulp.task('serve', ['sass'], function() {
 gulp.task('sass', function() {
     return gulp.src("app/scss/*.scss")
         .pipe(sass())
+        .pipe(prefix("last 2 version", "> 1%", "ie 8", "ie 7"))
         .pipe(gulp.dest("app/css"))
         .pipe(browserSync.stream());
 });
