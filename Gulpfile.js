@@ -19,8 +19,8 @@ var components = {
         dest:   destDir + '/css'
     },
     image: {
-        source: sourceDir + '/img',
-        watch:  sourceDir + '/img/*',
+        source: sourceDir + '/images',
+        watch:  sourceDir + '/images/*',
         dest:   destDir + '/images'
     },
     js: {
