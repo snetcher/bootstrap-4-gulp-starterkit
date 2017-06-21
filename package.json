@@ -14,5 +14,6 @@
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
     "bootstrap": "4.0.0-alpha.4"
+    "gulp-autoprefixer": "^4.0.0",
   }
 }
