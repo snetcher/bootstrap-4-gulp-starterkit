@@ -7,6 +7,7 @@ var gulp        = require('gulp'),
     uglify      = require('gulp-uglify'),
     gutil       = require('gulp-util'),
     babel       = require('gulp-babel'),
+    validator   = require('gulp-html'),
     imagemin    = require('gulp-imagemin');
 
 var rootDir   = '.';
@@ -71,7 +72,11 @@ gulp.task('image', function () {
 
 gulp.task('html', function () {
     gulp.src(components.html.watch)
-        .pipe(gulp.dest(components.html.dest));
+    .pipe(validator()).on('error', function(err) {
+            gutil.log(gutil.colors.red('[Error]'), err.toString());
+            this.emit('end');
+    })
+    .pipe(gulp.dest(components.html.dest));
 });
 
 // Compile scss into CSS & auto-inject into browsers
