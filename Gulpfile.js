@@ -40,22 +40,19 @@ gulp.task('serve', ['scss', 'uglify', 'html', 'image'], function() {
 
     browserSync.init({server: destDir});
 
-    gulp.watch(components.scss.watch, ['scss']);
-    gulp.watch(components.js.watch, ['uglify']);
+    gulp.watch(components.scss.watch,  ['scss']);
+    gulp.watch(components.js.watch,    ['uglify']);
     gulp.watch(components.image.watch, ['image']);
-    gulp.watch(components.html.watch, ['html']);
-    gulp.watch(components.html.watch)
-    .on('change', browserSync.reload);
+    gulp.watch(components.html.watch,  ['html']);
+    gulp.watch(components.html.watch).on('change', browserSync.reload);
 });
 
 gulp.task('uglify', function(){
     gulp.src(components.js.watch)
-    .pipe(uglify()
             .on('error', function(err) {
                 gutil.log(gutil.colors.red('[Error]'), err.toString());
                 this.emit('end');
-            })
-        )
+        })
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(components.js.dest));
 });
