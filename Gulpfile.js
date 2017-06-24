@@ -15,7 +15,6 @@ const pngquant = require('imagemin-pngquant');
 const cache = require('gulp-cache');
 const include = require("gulp-include");
 
-
 // Directories definition.
 const rootDir = '.';
 const sourceDir = rootDir + '/src';
@@ -47,12 +46,16 @@ const components = {
 };
 
 gulp.task('watch', ['sass', 'uglify', 'html', 'image'], function () {
-
   browserSync.init({server: destDir});
 
   gulp.watch(components.sass.watch, ['sass']);
+  gulp.watch(components.sass.watch).on('change', browserSync.reload);
+
   gulp.watch(components.js.watch, ['uglify']);
+  gulp.watch(components.js.watch).on('change', browserSync.reload);
+
   gulp.watch(components.image.watch, ['image']);
+
   gulp.watch(components.html.watch, ['html']);
   gulp.watch(components.html.watch).on('change', browserSync.reload);
 });
