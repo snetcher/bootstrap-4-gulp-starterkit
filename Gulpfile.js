@@ -65,7 +65,6 @@ gulp.task('uglify', function(){
                 this.emit('end');
         })
     )
-    .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(components.js.dest));
 });
 
