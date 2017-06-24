@@ -41,7 +41,6 @@ var components = {
 }
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['scss', 'uglify', 'html', 'image'], function() {
 gulp.task('serve', ['sass', 'uglify', 'html', 'image'], function() {
 
     browserSync.init({server: destDir});
