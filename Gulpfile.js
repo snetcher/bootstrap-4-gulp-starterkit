@@ -88,7 +88,7 @@ gulp.task('html', function () {
 gulp.task('scss', function() {
     gulp.src(components.scss.watch)
     .pipe(scss())
-    .pipe(prefix("last 2 version", "> 1%", "ie 8", "ie 7"))
+    .pipe(prefix('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(minifycss())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(components.scss.dest))
