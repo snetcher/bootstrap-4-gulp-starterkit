@@ -35,7 +35,8 @@ var components = {
     js: {
         source: sourceDir + '/js',
         watch:  sourceDir + '/js/*.js',
-        dest:   destDir   + '/js'
+        dest:   destDir   + '/js',
+        all:    'scripts.js'
     }
 }
 
@@ -53,6 +54,9 @@ gulp.task('serve', ['scss', 'uglify', 'html', 'image'], function() {
 
 gulp.task('uglify', function(){
     gulp.src(components.js.watch)
+    // .pipe(concat(components.js.all))
+    .pipe(include())
+      .on('error', console.log)
     .pipe(babel({
         presets: ['es2015']
     }))
