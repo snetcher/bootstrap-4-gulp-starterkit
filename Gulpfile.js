@@ -55,7 +55,6 @@ gulp.task('serve', ['scss', 'uglify', 'html', 'image'], function() {
 gulp.task('uglify', function(){
     let options = {mangle: false, compress: false};
     gulp.src(components.js.watch)
-    // .pipe(concat(components.js.all))
     .pipe(include())
       .on('error', console.log)
     .pipe(babel({
@@ -91,7 +90,6 @@ gulp.task('scss', function() {
     gulp.src(components.scss.watch)
     .pipe(scss())
     .pipe(prefix("last 2 version", "> 1%", "ie 8", "ie 7"))
-    // .pipe(gulp.dest(components.scss.dest))
     .pipe(minifycss())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(components.scss.dest))
