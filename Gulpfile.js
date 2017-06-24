@@ -2,13 +2,15 @@ var gulp        = require('gulp'),
     browserSync = require('browser-sync').create(),
     scss        = require('gulp-sass'),
     minifycss   = require('gulp-clean-css'),
+    concat      = require('gulp-concat'),
     prefix      = require('gulp-autoprefixer'),
     rename      = require('gulp-rename'),
     uglify      = require('gulp-uglify'),
     gutil       = require('gulp-util'),
     babel       = require('gulp-babel'),
     validator   = require('gulp-html'),
-    imagemin    = require('gulp-imagemin');
+    imagemin    = require('gulp-imagemin'),
+    include       = require("gulp-include");
 
 var rootDir   = '.';
 var sourceDir = rootDir + '/src';
