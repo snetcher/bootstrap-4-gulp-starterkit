@@ -53,6 +53,7 @@ gulp.task('serve', ['scss', 'uglify', 'html', 'image'], function() {
 });
 
 gulp.task('uglify', function(){
+    let options = {mangle: false, compress: false};
     gulp.src(components.js.watch)
     // .pipe(concat(components.js.all))
     .pipe(include())
@@ -60,7 +61,7 @@ gulp.task('uglify', function(){
     .pipe(babel({
         presets: ['es2015']
     }))
-    .pipe(uglify().on('error', function(err) {
+    .pipe(uglify(options).on('error', function(err) {
                 gutil.log(gutil.colors.red('[Error]'), err.toString());
                 this.emit('end');
         })
