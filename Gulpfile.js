@@ -3,14 +3,17 @@ var gulp        = require('gulp'),
     sass        = require('gulp-sass'),
     minifycss   = require('gulp-clean-css'),
     concat      = require('gulp-concat'),
-    prefix      = require('gulp-autoprefixer'),
+    autoprefixer= require('gulp-autoprefixer'),
     rename      = require('gulp-rename'),
+    del         = require('del'),
     uglify      = require('gulp-uglify'),
     gutil       = require('gulp-util'),
     babel       = require('gulp-babel'),
     validator   = require('gulp-html'),
     imagemin    = require('gulp-imagemin'),
-    include       = require("gulp-include");
+    pngquant    = require('imagemin-pngquant'),
+    cache       = require('gulp-cache'),
+    include     = require("gulp-include");
 
 var rootDir   = '.';
 var sourceDir = rootDir + '/src';
@@ -40,7 +43,6 @@ var components = {
     }
 }
 
-// Static Server + watching scss/html files
 gulp.task('serve', ['sass', 'uglify', 'html', 'image'], function() {
 
     browserSync.init({server: destDir});
@@ -84,15 +86,14 @@ gulp.task('html', function () {
     .pipe(gulp.dest(components.html.dest));
 });
 
-// Compile scss into CSS & auto-inject into browsers
 gulp.task('sass', function() {
     gulp.src(components.scss.watch)
     .pipe(sass())
-    .pipe(prefix('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
     .pipe(minifycss())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(components.sass.dest))
-    .pipe(browserSync.stream());
+    .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('default', ['serve']);
