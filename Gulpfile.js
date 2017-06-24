@@ -43,7 +43,7 @@ var components = {
     }
 }
 
-gulp.task('serve', ['sass', 'uglify', 'html', 'image'], function() {
+gulp.task('watch', ['sass', 'uglify', 'html', 'image'], function() {
 
     browserSync.init({server: destDir});
 
@@ -96,4 +96,4 @@ gulp.task('sass', function() {
     .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['watch']);
