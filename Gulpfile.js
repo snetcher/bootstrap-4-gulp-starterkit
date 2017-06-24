@@ -1,6 +1,6 @@
 var gulp        = require('gulp'),
     browserSync = require('browser-sync').create(),
-    scss        = require('gulp-sass'),
+    sass        = require('gulp-sass'),
     minifycss   = require('gulp-clean-css'),
     concat      = require('gulp-concat'),
     prefix      = require('gulp-autoprefixer'),
@@ -17,7 +17,7 @@ var sourceDir = rootDir + '/src';
 var destDir   = rootDir + '/build';
 
 var components = {
-    scss: {
+    sass: {
         source: sourceDir + '/scss',
         watch:  sourceDir + '/scss/*.scss',
         dest:   destDir   + '/css'
@@ -42,10 +42,11 @@ var components = {
 
 // Static Server + watching scss/html files
 gulp.task('serve', ['scss', 'uglify', 'html', 'image'], function() {
+gulp.task('serve', ['sass', 'uglify', 'html', 'image'], function() {
 
     browserSync.init({server: destDir});
 
-    gulp.watch(components.scss.watch,  ['scss']);
+    gulp.watch(components.sass.watch,  ['sass']);
     gulp.watch(components.js.watch,    ['uglify']);
     gulp.watch(components.image.watch, ['image']);
     gulp.watch(components.html.watch,  ['html']);
@@ -85,13 +86,13 @@ gulp.task('html', function () {
 });
 
 // Compile scss into CSS & auto-inject into browsers
-gulp.task('scss', function() {
+gulp.task('sass', function() {
     gulp.src(components.scss.watch)
-    .pipe(scss())
+    .pipe(sass())
     .pipe(prefix('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(minifycss())
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest(components.scss.dest))
+    .pipe(gulp.dest(components.sass.dest))
     .pipe(browserSync.stream());
 });
 
