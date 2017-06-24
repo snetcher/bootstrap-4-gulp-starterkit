@@ -96,4 +96,13 @@ gulp.task('sass', function() {
     .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task('browser-sync', function() {
+    browserSync({
+        server: { 
+            baseDir: destDir
+        },
+        notify: false
+    });
+});
+
 gulp.task('default', ['watch']);
