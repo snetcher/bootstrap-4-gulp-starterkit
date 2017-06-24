@@ -17,11 +17,14 @@
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^6.1.2",
     "gulp-clean-css": "^3.4.2",
+    "gulp-concat": "^2.6.1",
     "gulp-html": "^0.4.6",
     "gulp-imagemin": "^3.3.0",
+    "gulp-include": "^2.3.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^3.0.0",
-    "gulp-util": "^3.0.8"
+    "gulp-util": "^3.0.8",
+    "jquery": "^3.2.1"
   }
 }
